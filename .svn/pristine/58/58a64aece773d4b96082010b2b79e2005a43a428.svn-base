@@ -1,0 +1,118 @@
+//
+//  json.h
+//  JSON Parser
+//
+//  Created by Bryan Johnson on 11/28/14.
+//  Copyright (c) 2014 Bryan Johnson. All rights reserved.
+//
+
+#ifndef __JSON_Parser__json__
+#define __JSON_Parser__json__
+
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <map>
+
+namespace json {
+    
+    struct Value{
+        std::string string_data;
+        bool bool_data;
+        std::map<std::string, Value> object_data;
+        std::vector<Value> array_data;
+        enum Type {
+            STRING,
+            ARRAY,
+            OBJECT,
+            BOOLEAN,
+            NUMBER,
+            NIL
+        };
+        Type type;
+        
+        void print_pretty() {
+            for (std::map<std::string, Value>::iterator it = this->object_data.begin(); it != this->object_data.end(); ++it)
+            {
+                // ???? 
+            }
+        }
+    };
+    
+    struct String : std::string, Value {
+        String(std::string s) {
+            this->type = STRING;
+            this->string_data = s;
+        }
+        String(std::string begin, std::string end) {
+            this->type = STRING;
+            std::string::size_type pos = begin.find(end);
+            if(pos != std::string::npos)
+                this->string_data = begin.substr(1, pos - 2);
+            else
+                this->string_data = begin.substr(1, pos - 2);
+        }
+    };
+    
+    struct Number : Value {
+        Number(std::string begin, std::string end) {
+            this->type = NUMBER;
+            std::string::size_type pos = begin.find(end);
+            this->string_data = begin.substr(0, pos);
+        }
+    };
+    
+    struct Null : Value{};
+    
+    struct Boolean : Value {
+        Boolean(bool b) {
+            this->type = BOOLEAN;
+            bool_data = b;
+        }
+    };
+    
+    struct Array : std::vector<Value>, Value {
+        void push_back(Value v) {
+            this->type = ARRAY;
+            array_data.push_back(v);
+        }
+    };
+    
+    struct Pair : std::pair<std::string, Value> {
+        std::pair<std::string, Value> data;
+        void make_pair(std::string s, Value v) {
+            data = std::make_pair(s, v);
+        }
+        
+        std::string first() {
+            return data.first;
+        }
+        
+        Value second() {
+            return data.second;
+        }
+    };
+    
+    struct Object : std::map<std::string, Value>, Value{
+        Object() {
+            this->type = OBJECT;
+        }
+        void insert(Pair pair) {
+            object_data[pair.first()] = pair.second();
+        }
+    };
+    
+    void parse_white_space(const char*& first, const char* last);    
+    Pair parse_json_pair(const char*& first, const char* last);
+    Value parse_json_string(const char*& first, const char* last);
+    Value parse_json_object(const char*& first, const char* last);
+    Value parse_json_array(const char*& first, const char* last);
+    Value parse_json_boolean(const char*& first, const char* last);
+    Value parse_json_null(const char*& first, const char* last);
+    Value parse_json_number(const char*& first, const char* last);
+    Value parse_json_value(const char*& first, const char* last);
+    Value parse(const std::string &str);
+}
+
+
+#endif /* defined(__JSON_Parser__json__) */

@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/bryanjohnson/documents/OOP/json/json.cpp
+json.h
+/Users/bryanjohnson/documents/OOP/json/json.h
+stdexcept
+-
+string.h
+-
+
+/Users/bryanjohnson/documents/OOP/json/json.h
+stdio.h
+-
+iostream
+-
+vector
+-
+map
+-
+
+/Users/bryanjohnson/documents/OOP/json/main.cpp
+iostream
+-
+cstdlib
+-
+json.h
+/Users/bryanjohnson/documents/OOP/json/json.h
+

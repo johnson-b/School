@@ -1,0 +1,101 @@
+//
+//  json.h
+//  JSON Parser
+//
+//  Created by Bryan Johnson on 11/28/14.
+//  Copyright (c) 2014 Bryan Johnson. All rights reserved.
+//
+
+#ifndef JSON_Parser__json__
+#define JSON_Parser__json__
+
+#include <stdio.h>
+#include <iostream>
+#include <vector>
+#include <map>
+
+namespace json {
+    
+    struct Value{
+//        std::string string_data;
+//        bool bool_data;
+//        std::map<std::string, Value> object_data;
+//        std::vector<Value> array_data;
+        enum Type {
+            STRING,
+            ARRAY,
+            OBJECT,
+            BOOLEAN,
+            NUMBER,
+            NIL
+        };
+        Type type;
+        
+        virtual std::string toString() {
+            return "";
+        }
+        
+//        void print_pretty() {
+//            for (std::map<std::string, Value>::iterator it = this->object_data.begin(); it != this->object_data.end(); ++it)
+//            {
+//                // ???? 
+//            }
+//        }
+    };
+    
+    struct String : std::string, Value {
+        std::string value;
+        String(std::string s) {
+            this->type = STRING;
+            value = s;
+        }
+        String(std::string begin, std::string end) {
+            this->type = STRING;
+            std::string::size_type pos = begin.find(end);
+            if(pos != std::string::npos)
+                value = begin.substr(1, pos - 2);
+            else
+                value = begin.substr(1, pos - 2);
+        }
+        
+        virtual std::string toString() {
+            return value;
+        }
+        
+    };
+    
+    struct Number : Value {
+        std::string value;
+        Number(std::string begin, std::string end) {
+            this->type = NUMBER;
+            std::string::size_type pos = begin.find(end);
+            value = begin.substr(0, pos);
+        }
+    };
+    
+    struct Null : Value{};
+    
+    struct Boolean : Value {
+        bool value = false;
+        Boolean() = default;
+        Boolean(bool *b) {
+            this->type = BOOLEAN;
+            value = b;
+        }
+    };
+    
+    struct Array : std::vector<Value*>, Value { };
+    
+    using Pair = std::pair<std::string, Value*>;
+    
+    struct Object : std::map<std::string, Value*>, Value{
+        Object() {
+            this->type = OBJECT;
+        }
+    };
+    
+    Value* parse(const std::string &str);
+}
+
+
+#endif
