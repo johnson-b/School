@@ -111,16 +111,12 @@ namespace json {
         Array() {
             type = ARRAY;
         }
-        int index = 0;
         virtual std::string toString() {
-            for (size_t i = 0; i < this->size() - 1; i++) {
-                try {
-                    ret += this[i].toString() + ", ";   
-                } catch (std::exception e) {
-                    // continue, ignore exception
-                }
+            for(std::vector<Value*>::iterator it = this->begin(); it != this->end(); ++it) {
+                ret += (*it)->toString();
+                ret += ", \n";
             }
-            ret += "\n]";
+            ret += "]";
             return ret;
         }
     };
@@ -134,14 +130,14 @@ namespace json {
         }
         
         virtual std::string toString() {
-            for (std::map<std::string, Value*>::iterator it = this->begin(); it != this->end(); ++it)
-            {
-                try {
-                    ret += it->first + ": " + it->second->toString() + ", \n" + "\n} ";    
-                } catch (std::exception e) {
-                    // continue, ignore the exception
-                }
+            for (std::map<std::string, Value*>::iterator it = this->begin(); it != this->end(); it++)
+            {   
+                ret += it->first;
+                ret += ": ";
+                ret += it->second->toString();
+                ret += ", \n";  
             }
+            ret += "}";
             return ret;
         }
     };

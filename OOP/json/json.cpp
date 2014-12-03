@@ -31,6 +31,7 @@ namespace json {
             error.append(first);
             throw std::runtime_error(error);
         }
+        parse_white_space(first, last);
         ++first;
         
         Value *value = parse_json_value(first, last);
