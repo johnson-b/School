@@ -23,6 +23,8 @@ namespace json {
         Pair p;
         Value *key = parse_json_value(first, last);
         // TODO: check to make sure val.type is string?
+        if(key->type != Value::STRING) 
+            throw std::runtime_error("invalid type, expected STRING");
         parse_white_space(first, last);
         if(*first != ':') {
             std::string error = "parse object error: ";

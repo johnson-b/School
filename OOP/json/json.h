@@ -114,11 +114,13 @@ namespace json {
         int index = 0;
         virtual std::string toString() {
             for (size_t i = 0; i < this->size() - 1; i++) {
-                
-                ret += this[i].toString() + ", ";
+                try {
+                    ret += this[i].toString() + ", ";   
+                } catch (std::exception e) {
+                    // continue, ignore exception
+                }
             }
             ret += "\n]";
-            
             return ret;
         }
     };
@@ -134,7 +136,11 @@ namespace json {
         virtual std::string toString() {
             for (std::map<std::string, Value*>::iterator it = this->begin(); it != this->end(); ++it)
             {
-                ret += it->first + ": " + it->second->toString() + ", \n" + "\n} ";
+                try {
+                    ret += it->first + ": " + it->second->toString() + ", \n" + "\n} ";    
+                } catch (std::exception e) {
+                    // continue, ignore the exception
+                }
             }
             return ret;
         }
