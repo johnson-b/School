@@ -1,0 +1,55 @@
+Bryan Johnson - Homework 1 - Data Structures
+
+1. 
+	Linked List Stack:
+		push()     O(1)
+		pop()      O(1)
+		peek()     O(1)
+		isEmpty()  O(1)
+	
+	Array Based Stack:
+		push()     O(n)
+		pop()      O(n)
+		peek()     O(1)
+		isEmpty()  O(1)
+		isFull()   O(1)
+
+	Linked List Queue:
+		enqueue()   O(1)
+		dequeue()   O(1)
+		peek()      O(1)
+		isEmpty()   O(1)
+
+	Array Based Queue:
+		enqueue()   O(n)
+		dequeue()   O(n)
+		peek()      O(1)
+		isEmpty()   O(1)
+		isFull()    O(1)
+
+2. An advantage a linked list stack or queue has over array based is speed when inserting and deleting. You must shift the contents of the array every time you add or delete vs. a linked list you do not.
+
+3. 
+int recursiveSum(int x, int y) {
+    if (x == y)
+    {
+	return -1;
+    }
+    else
+    {
+	if (x < y) 
+	{
+	    return y + recursiveSum(x, y - 1);
+	}
+	else
+	{
+	    return x + recursiveSum(y, x - 1);
+	}
+    }	
+}
+
+4. Recursion is allows much neater code than iterations. Iterations however are much faster when dealing with large quantities.
+
+5. It loops for quite sometime before eventually getting to the point of a stack overflow.
+
+6. A linked list contains nodes and each node points to the next node in the list. A linked list can either be empty and represented by null or is an object that contains a pointer that then points to another linked list.

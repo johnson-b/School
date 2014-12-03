@@ -1,0 +1,22 @@
+1. Preorder:
+   A B D H E I L C F J G K M
+   Inorder:
+   D H B I L E A J F C K M G
+   Postorder:
+   H D L I E B J F M K G C A
+
+2. 
+	 15
+   2             29
+      5      16      35
+         8       23
+
+3. 
+        8
+     2           29
+        5    16      35
+                 23
+
+4. Root Node
+
+5. Full Binary Tree
