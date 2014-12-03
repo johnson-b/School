@@ -3,7 +3,6 @@
 //  JSON Parser
 //
 //  Created by Bryan Johnson on 11/28/14.
-//  Copyright (c) 2014 Bryan Johnson. All rights reserved.
 //
 
 #ifndef JSON_Parser__json__
@@ -30,7 +29,7 @@ namespace json {
             return "";
         }
         
-        virtual std::string toString() = 0;
+        virtual std::string printPretty(int) = 0;
     };
     
     struct String : std::string, Value {
@@ -53,7 +52,7 @@ namespace json {
             return value;
         }
         
-        virtual std::string toString() {
+        virtual std::string printPretty(int tab) {
             ret += "\"" + value + "\"";
             return ret;
         }
@@ -71,7 +70,7 @@ namespace json {
             return value;
         }
         
-        virtual std::string toString() {
+        virtual std::string printPretty(int tab) {
             ret += " " + value;
             return ret;
         }
@@ -85,7 +84,7 @@ namespace json {
             return "null";
         }
         
-        virtual std::string toString() {
+        virtual std::string printPretty(int tab) {
             return "null";
         }
     };
@@ -98,7 +97,7 @@ namespace json {
             value = b;
         }
         
-        virtual std::string toString() {
+        virtual std::string printPretty(int tab) {
             if(value)
                 return "true";
             else
@@ -111,11 +110,13 @@ namespace json {
         Array() {
             type = ARRAY;
         }
-        virtual std::string toString() {
+        virtual std::string printPretty(int tab) {
+            std::string s(tab, '\t');
             for(std::vector<Value*>::iterator it = this->begin(); it != this->end(); ++it) {
-                ret += (*it)->toString();
+                ret += (*it)->printPretty(tab);
                 ret += ", \n";
             }
+            ret += s;
             ret += "]";
             return ret;
         }
@@ -129,15 +130,20 @@ namespace json {
             type = OBJECT;
         }
         
-        virtual std::string toString() {
+        virtual std::string printPretty(int tab) {
+            ++tab;
+            std::string s(tab, '\t');
             for (std::map<std::string, Value*>::iterator it = this->begin(); it != this->end(); it++)
             {   
+                ret += s;
                 ret += it->first;
                 ret += ": ";
-                ret += it->second->toString();
+                ret += it->second->printPretty(tab);
                 ret += ", \n";  
             }
+            ret += s;
             ret += "}";
+            --tab;
             return ret;
         }
     };
