@@ -3,7 +3,6 @@
 //  JSON Parser
 //
 //  Created by Bryan Johnson on 11/28/14.
-//  Copyright (c) 2014 Bryan Johnson. All rights reserved.
 //
 
 #include "json.h"
@@ -178,5 +177,32 @@ namespace json {
     Value* parse(const std::string &str) {
         const char* json_string = str.c_str();
         return parse_json_value(json_string, json_string + str.size());
+    }
+
+    Value* filter(int argc, const char* argv[], Value *v) {
+        std::map<std::string, json::Value*>::iterator obj_it = dynamic_cast<json::Object*>(v)->find("data");
+        json::Value *data = (*obj_it).second;
+        std::map<std::string, json::Value*>::iterator arr_it = dynamic_cast<json::Object*>(data)->find("children");
+        json::Value *children = (*arr_it).second;
+
+        for(std::vector<json::Value*>::iterator it = dynamic_cast<json::Array*>(children)->begin(); it != dynamic_cast<json::Array*>(children)->end(); ++it) {
+            json::Value *value = (*it);
+            std::map<std::string, json::Value*>::iterator data_it = dynamic_cast<json::Object*>(value)->find("data");
+            json::Value *object = (*data_it).second;
+            std::map<std::string, json::Value*>::iterator iter = dynamic_cast<json::Object*>(object)->begin();
+            while(iter != dynamic_cast<json::Object*>(object)->end()) {
+                int counter = 0; // used to keep track of how many 'misses' we get from searching
+                for (int i = 1; i < argc; ++i)
+                {
+                    if((*iter).first != argv[i]) {
+                        counter++;  
+                    }       
+                }
+                if(counter == argc - 1)
+                    dynamic_cast<json::Object*>(object)->erase(iter);   
+                iter++;
+            }
+        }
+        return v;
     }
 }
