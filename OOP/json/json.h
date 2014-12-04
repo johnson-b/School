@@ -14,6 +14,8 @@
 #include <map>
 
 namespace json {
+    // Base struct, holds a type, one virtual function to get the Value's value as well
+    // as a pure virtual function that prints out the json in a 'pretty' format.
     struct Value{
         enum Type {
             STRING,
@@ -29,9 +31,10 @@ namespace json {
             return "";
         }
         
-        virtual std::string printPretty(int) = 0;
+        virtual std::string printPretty(int) = 0; // int argument is to keep track of 'tabbing'
     };
     
+    /* Will hold a value for every json value found that is a string */
     struct String : std::string, Value {
         std::string value;
         std::string ret;
@@ -58,6 +61,9 @@ namespace json {
         }
     };
     
+    /* We don't care about doing any mathematical operations on a json
+       value, so therefore we treat a Number like a String except it 
+       contains only characters that resemble digits. */
     struct Number : Value {
         std::string value;
         std::string ret;
@@ -76,6 +82,8 @@ namespace json {
         }
     };
     
+    /* Stands for an empty object that simply holds the value 'null'.
+       Otherwise it remains empty. */
     struct Null : Value{
         Null() {
             type = NIL;
@@ -89,6 +97,7 @@ namespace json {
         }
     };
     
+    /* Holds a value either true or false, pretty basic. */
     struct Boolean : Value {
         bool value = false;
         Boolean() = default;
@@ -105,13 +114,15 @@ namespace json {
         }
     };
     
+    /* Holds multiple Values, in a std::vector. */
     struct Array : std::vector<Value*>, Value {
-        std::string ret = "[ \n";
+        std::string ret = "[ \n"; // Every new Array, we want its contents to print on a new line.
         Array() {
             type = ARRAY;
         }
         virtual std::string printPretty(int tab) {
             std::string s(tab, '\t');
+            // recursively prints each Value inside of it, 'pretty'
             for(std::vector<Value*>::iterator it = this->begin(); it != this->end(); ++it) {
                 ret += (*it)->printPretty(tab);
                 ret += ", \n";
@@ -122,8 +133,9 @@ namespace json {
         }
     };
     
-    using Pair = std::pair<std::string, Value*>;
+    using Pair = std::pair<std::string, Value*>; // utility used to add each key, value pair to an Object (std::map)
     
+    /* This is the root 'object' of json. Each json key value pair is represented here by using std::map. */
     struct Object : std::map<std::string, Value*>, Value{
         std::string ret = "{ \n";
         Object() {
@@ -133,6 +145,9 @@ namespace json {
         virtual std::string printPretty(int tab) {
             ++tab;
             std::string s(tab, '\t');
+
+            // Recursively pretty prints each key value pair that it contains while keeping track of tabs and
+            // adding to tabs for every 'nested' object
             for (std::map<std::string, Value*>::iterator it = this->begin(); it != this->end(); it++)
             {   
                 ret += s;
@@ -148,33 +163,8 @@ namespace json {
         }
     };
 
-    // Value* filter(int argc, const char* argv[], Value *v) {
-    //     std::map<std::string, json::Value*>::iterator obj_it = dynamic_cast<json::Object*>(v)->find("data");
-    //     json::Value *data = (*obj_it).second;
-    //     std::map<std::string, json::Value*>::iterator arr_it = dynamic_cast<json::Object*>(data)->find("children");
-    //     json::Value *children = (*arr_it).second;
-
-    //     for(std::vector<json::Value*>::iterator it = dynamic_cast<json::Array*>(children)->begin(); it != dynamic_cast<json::Array*>(children)->end(); ++it) {
-    //         json::Value *value = (*it);
-    //         std::map<std::string, json::Value*>::iterator data_it = dynamic_cast<json::Object*>(value)->find("data");
-    //         json::Value *object = (*data_it).second;
-    //         std::map<std::string, json::Value*>::iterator iter = dynamic_cast<json::Object*>(object)->begin();
-    //         while(iter != dynamic_cast<json::Object*>(object)->end()) {
-    //             int counter = 0; // used to keep track of how many 'misses' we get from searching
-    //             for (int i = 1; i < argc; ++i)
-    //             {
-    //                 if((*iter).first != argv[i]) {
-    //                     counter++;  
-    //                 }       
-    //             }
-    //             if(counter == argc - 1)
-    //                 dynamic_cast<json::Object*>(object)->erase(iter);   
-    //             iter++;
-    //         }
-    //     }
-    //     return v;
-    // }
     Value* filter(int argc, const char* argv[], Value *v);
+    
     Value* parse(const std::string &str);
 }
 
