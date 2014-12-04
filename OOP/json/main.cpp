@@ -3,7 +3,12 @@
 //  JSON Parser
 //
 //  Created by Bryan Johnson on 11/15/14.
-//  Copyright (c) 2014 Bryan Johnson. All rights reserved.
+//  
+// This program is used to parse a json object that is returned from any reddit subreddit page.
+// If just the json object is given with no arguments, the json is just formatted correctly and
+// then returned. If arguments are found, it will first parse the json and then filter out any
+// object that does NOT contain a value that matches the arguments given; then it prints out the
+// filtered version of the json. 
 //
 
 #include <iostream>
