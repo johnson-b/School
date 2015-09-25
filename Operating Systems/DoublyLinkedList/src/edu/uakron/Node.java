@@ -6,20 +6,20 @@ package edu.uakron;
  * 9/19/15 7:41 PM
  */
 public class Node<T> {
-    private T data;
+    private T value;
     private Node<T> previous;
     private Node<T> next;
 
-    public Node(T data) {
-        this.data = data;
+    public Node(T value) {
+        this.value = value;
     }
 
-    public T getData() {
-        return data;
+    public T getValue() {
+        return value;
     }
 
-    public void setData(T data) {
-        this.data = data;
+    public void setValue(T value) {
+        this.value = value;
     }
 
     public Node<T> getPrevious() {
