@@ -2,7 +2,7 @@ package edu.uakron;
 
 import java.util.Arrays;
 
-public class Main {
+public class DoublyLinkedListTest {
 
     public static void main(String[] args) {
         // ===== Doubly Linked List ===== //
