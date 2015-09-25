@@ -1,9 +1,8 @@
-package edu.uakron;
+package edu.uakron.LinkedList;
 
 /**
- * Copyright bryanjohnson
- * <p>
- * 9/25/15 3:41 PM
+ * Interface representing functionality of a LinkedList
+ * @param <T> Type of value of Node
  */
 public interface LinkedList<T> {
 

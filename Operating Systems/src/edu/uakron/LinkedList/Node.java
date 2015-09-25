@@ -1,9 +1,8 @@
-package edu.uakron;
+package edu.uakron.LinkedList;
 
 /**
- * Copyright bryanjohnson
- *
- * 9/19/15 7:41 PM
+ * Data structure to represent a Node in a LinkedList
+ * @param <T> Type of value of Node
  */
 public class Node<T> {
     private T value;

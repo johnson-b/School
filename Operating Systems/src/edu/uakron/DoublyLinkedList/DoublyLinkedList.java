@@ -1,4 +1,7 @@
-package edu.uakron;
+package edu.uakron.DoublyLinkedList;
+
+import edu.uakron.LinkedList.LinkedList;
+import edu.uakron.LinkedList.Node;
 
 /**
  * Data structure representing a doubly linked list.

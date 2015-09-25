@@ -1,7 +1,10 @@
-package edu.uakron;
+package edu.uakron.DoublyLinkedList;
 
 import java.util.Arrays;
 
+/**
+ * Tests for DoublyLinkedList
+ */
 public class DoublyLinkedListTest {
 
     public static void main(String[] args) {
