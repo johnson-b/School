@@ -62,10 +62,6 @@ public class Main {
         // ===== Doubly Linked List ===== //
     }
 
-    private static void newLine() {
-        System.out.println();
-    }
-
     private static void assertThat(boolean bool, String str) {
         if (!bool) {
             System.out.println(str);
