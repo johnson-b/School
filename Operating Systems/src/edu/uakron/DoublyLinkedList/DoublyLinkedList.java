@@ -1,7 +1,6 @@
 package edu.uakron.DoublyLinkedList;
 
 import edu.uakron.LinkedList.LinkedList;
-import edu.uakron.LinkedList.Node;
 
 /**
  * Data structure representing a doubly linked list.
@@ -152,26 +151,6 @@ public class DoublyLinkedList<T> implements LinkedList<T> {
             size--;
         }
         return true;
-    }
-
-    @Override
-    public boolean removeValue(T val) {
-        if (size == 0) {
-            return false;
-        } else if (head.getValue() == val) {
-            removeAtIndex(0);
-        } else {
-            Node<T> temp = head;
-            for (int i = 0; i < size - 1; i++) {
-                temp = temp.getNext();
-                if (temp.getValue() == val) {
-                    removeAtIndex(i + 1);
-                    break;
-                }
-            }
-            return true;
-        }
-        return false;
     }
 
     @Override

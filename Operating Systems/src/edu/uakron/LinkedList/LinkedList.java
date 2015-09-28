@@ -29,13 +29,6 @@ public interface LinkedList<T> {
     boolean removeAtIndex(int index);
 
     /**
-     * Removes node based on found value in list
-     * @param val Value of node to be removed
-     * @return true if node is removed successfully, false otherwise
-     */
-    boolean removeValue(T val);
-
-    /**
      * Finds the index of the first node in the list with the value 'val'
      * @param val Value of node to be searched
      * @return Zero based index of node in list, -1 if not found
