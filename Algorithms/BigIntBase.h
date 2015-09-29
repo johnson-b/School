@@ -21,7 +21,7 @@ typedef unsigned char uchar;
 typedef list<uchar> IntList;
 
 class BigIntBase {
-private:
+protected:
    IntList intAsList;
    bool isPositive;
 public:
@@ -31,13 +31,6 @@ public:
    BigIntBase(int);
    
    int getLength() const;
-   //bool isPrime();
-   
-   static BigIntBase random(int const& digits);
-   //static BigIntBase randomOdd(int const& digits);
-   static BigIntBase randomPrime(int const& digits);
-   static BigIntBase modExp(BigIntBase const& base, BigIntBase exponent, BigIntBase const& mod);
-   static bool fermatTest(BigIntBase value, int iterations);
    
    friend ostream& operator<<(ostream& stream, BigIntBase const& num);
    friend ostream& operator<<(ostream& stream, int const& num);
@@ -67,9 +60,8 @@ public:
    BigIntBase operator/(int const& thatNum) const;
    BigIntBase half();
    
-private:
+protected:
    void borrow(IntList::reverse_iterator place) const;
-   //bool fermatTest(int);  
 };
 
 #endif
