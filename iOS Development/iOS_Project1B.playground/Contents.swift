@@ -1,3 +1,11 @@
+/*
+Project 1b
+iOS Fall 15
+
+Bryan Johnson
+bmj29@zips.uakron.edu
+*/
+
 class Dog {
     var name: String
     var gender: String
