@@ -6,9 +6,9 @@
 #include <vector>
 #include <map>
 #include <iostream>
-
 const int MAX = 256;
 
+/* ============================== NODE_BEGIN ============================== */
 struct Node {
     const int freq;
     
@@ -44,7 +44,9 @@ struct Leaf : Node
 struct NodeComparison {
     bool operator()(const Node* left, const Node* right) const { return left->freq > right->freq; }
 };
+/* ============================== NODE_END ============================== */
 
+/* ============================== HUFFMAN_BEGIN ============================== */
 Node* Tree(const int (&frequencies)[MAX]) {
     std::priority_queue<Node*, std::vector<Node*>, NodeComparison> trees;
     
@@ -67,8 +69,8 @@ Node* Tree(const int (&frequencies)[MAX]) {
     return trees.top();
 }
 
-void Codes(const Node* node, const std::vector<char>& first, std::map<char, std::vector<char> >& codes) {
-    if (const Leaf* l = dynamic_cast<const Leaf*>(node))
+void Compress(const Node* node, const std::vector<char>& first, std::map<char, std::vector<char> >& codes) {
+    if (const Leaf* l = dynamic_cast<const Leaf*>(node) )
     {
         codes[l->character] = first;
     }
@@ -76,39 +78,63 @@ void Codes(const Node* node, const std::vector<char>& first, std::map<char, std:
     {
         std::vector<char> left_or_first = first;
         left_or_first.push_back('0');
-        Codes(huffnode->left, left_or_first, codes);
+        Compress(huffnode->left, left_or_first, codes);
         
         std::vector<char> right_of_first = first;
         right_of_first.push_back('1');
-        Codes(huffnode->right, right_of_first, codes);
+        Compress(huffnode->right, right_of_first, codes);
     }
 }
 
-void TreeAsString(Node* root){
+void TreeAsStringPost(Node* root) {
     if (!root) {
         return;
     }
     
+    if (root->type == Node::HUFF) {
+        TreeAsStringPost(dynamic_cast<HuffNode*>(root)->left);
+    }
+
+    if (root->type == Node::HUFF) {
+        TreeAsStringPost(dynamic_cast<HuffNode*>(root)->right);
+    }
+
     if (root->type == Node::LEAF) {
+        std::cout << root->freq;
         std::cout << dynamic_cast<Leaf*>(root)->character;
     }
     else {
-        std::cout << "*";
-    }
-    
-    if (root->type == Node::HUFF) {
-        TreeAsString(dynamic_cast<HuffNode*>(root)->left);
-    }
-    else {
-        std::cout << "/";
-    }
-    
-    if (root->type == Node::HUFF) {
-        TreeAsString(dynamic_cast<HuffNode*>(root)->right);
-    }
-    else {
-        std::cout << "/";
+        std::cout << "@";
     }
 }
 
+void PrintFrequencyTable(Node* root, std::map<char, std::vector<char> > codes) {
+    if(!root) {
+        return;
+    }
+
+    if(root->type == Node::LEAF) {
+        char c = dynamic_cast<Leaf*>(root)->character;
+        std::cout << c;
+        std::cout << "(" << root->freq << "): ";
+
+        for(size_t i = 0; i < codes.find(c)->second.size(); i++) {
+            char code = codes.find(c)->second[i];
+            char unknown = codes.find(c)->first;
+            std::cout << code;
+        }
+        std::cout << std::endl;
+
+    }
+
+    if(root->type == Node::HUFF) {
+        PrintFrequencyTable(dynamic_cast<HuffNode*>(root)->left, codes);
+    }
+
+
+    if(root->type == Node::HUFF) {
+        PrintFrequencyTable(dynamic_cast<HuffNode*>(root)->right, codes);
+    }
+}
+/* ============================== HUFFMAN_END ============================== */
 #endif
