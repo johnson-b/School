@@ -1,0 +1,17 @@
+CREATE Table Tabletop
+(
+	tid int IDENTITY(1,1) PRIMARY KEY,
+	Name varchar(255),
+	MinimumPlayers int,
+	MaximumPlayers int,
+	TimeInMinutes int
+);
+
+INSERT INTO Tabletop
+VALUES ('Splendor', 2, 4, 30);
+
+INSERT INTO Tabletop
+VALUES ('Pandemic', 2, 4, 45);
+
+INSERT INTO Tabletop
+VALUES ('Lost Cities', 2, 2, 40);
