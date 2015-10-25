@@ -100,11 +100,9 @@ void TreeAsStringPost(Node* root) {
     }
 
     if (root->type == Node::LEAF) {
-        std::cout << root->freq;
         std::cout << dynamic_cast<Leaf*>(root)->character;
-    }
-    else {
-        std::cout << "@";
+    } else {
+    	std::cout << "@";
     }
 }
 
