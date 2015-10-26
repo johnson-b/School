@@ -94,15 +94,15 @@ void TreeAsStringPost(Node* root) {
     if (root->type == Node::HUFF) {
         TreeAsStringPost(dynamic_cast<HuffNode*>(root)->left);
     }
-
+    
     if (root->type == Node::HUFF) {
         TreeAsStringPost(dynamic_cast<HuffNode*>(root)->right);
     }
-
+    
     if (root->type == Node::LEAF) {
         std::cout << dynamic_cast<Leaf*>(root)->character;
     } else {
-    	std::cout << "@";
+        std::cout << "@";
     }
 }
 
@@ -110,26 +110,26 @@ void PrintFrequencyTable(Node* root, std::map<char, std::vector<char> > codes) {
     if(!root) {
         return;
     }
-
+    
     if(root->type == Node::LEAF) {
         char c = dynamic_cast<Leaf*>(root)->character;
         std::cout << c;
         std::cout << "(" << root->freq << "): ";
-
+        
         for(size_t i = 0; i < codes.find(c)->second.size(); i++) {
             char code = codes.find(c)->second[i];
             char unknown = codes.find(c)->first;
             std::cout << code;
         }
         std::cout << std::endl;
-
+        
     }
-
+    
     if(root->type == Node::HUFF) {
         PrintFrequencyTable(dynamic_cast<HuffNode*>(root)->left, codes);
     }
-
-
+    
+    
     if(root->type == Node::HUFF) {
         PrintFrequencyTable(dynamic_cast<HuffNode*>(root)->right, codes);
     }
