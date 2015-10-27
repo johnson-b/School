@@ -7,38 +7,12 @@
 int main(int argc, const char * argv[]) {
     int frequencies[huffman::MAX] = {0};
     std::string zeros = "00000000";
+    long originalFileSize, newFileSize;
     if(argc < 2) {
         std::cout << "Invalid arguments." << std::endl;
     } else {
         std::string fileName = argv[1];
-        if(fileName.find(".hzip") != std::string::npos) {
-            // decode
-            std::ifstream decodedFile;
-            decodedFile.open(fileName.c_str(), std::ios::binary);
-            struct stat fileStatus;
-            stat(fileName.c_str(), &fileStatus);
-            long fsize = fileStatus.st_size;
-            
-            char c[fsize];
-            decodedFile.read(c, fsize);
-            std::string s = "";
-            long count = 0;
-            while(count<fsize) {
-                unsigned char uc =  (unsigned char) c[count];
-                std::string p = ""; 
-                for (int j=0; j<8 && uc>0; j++) {
-                    if (uc%2==0)
-                        p="0"+p;
-                    else
-                        p="1"+p;
-                    uc=uc>>1;
-                }
-                p = zeros.substr(0, 8-p.size()) + p;
-                s+= p;
-                count++;
-            }
-            decodedFile.close();
-        } else if(fileName.find(".txt") != std::string::npos) {
+        if(fileName.find(".txt") != std::string::npos) {
             // encode
             std::fstream readFile;
             readFile.open(fileName.c_str());
@@ -98,8 +72,22 @@ int main(int argc, const char * argv[]) {
                     char c = (char)(binary & 255);
                     newFile.write(&c, 1);
                 }
+
                 readFile.close();
                 newFile.close();
+
+                // get original file size
+                struct stat oldFileStatus;
+                stat(fileName.c_str(), &oldFileStatus);
+                originalFileSize = oldFileStatus.st_size;
+
+                // get new file size
+                struct stat newFileStatus;
+                stat(newFileName.c_str(), &newFileStatus);
+                newFileSize = newFileStatus.st_size;
+
+                std::cout << "Original file size (" << fileName << "): " << originalFileSize << " bytes" << std::endl;
+                std::cout << "New file size (" << newFileName << "): " << newFileSize << " bytes" << std::endl;
             }
         } else {
             std::cout << "Invalid file type." << std::endl;
