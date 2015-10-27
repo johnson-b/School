@@ -118,7 +118,6 @@ void PrintFrequencyTable(Node* root, std::map<char, std::vector<char> > codes) {
         
         for(size_t i = 0; i < codes.find(c)->second.size(); i++) {
             char code = codes.find(c)->second[i];
-            char unknown = codes.find(c)->first;
             std::cout << code;
         }
         std::cout << std::endl;

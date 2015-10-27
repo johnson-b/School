@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
             long count = 0;
             while(count<fsize) {
                 unsigned char uc =  (unsigned char) c[count];
-                std::string p = ""; //a byte string
+                std::string p = ""; 
                 for (int j=0; j<8 && uc>0; j++) {
                     if (uc%2==0)
                         p="0"+p;
@@ -33,13 +33,11 @@ int main(int argc, const char * argv[]) {
                         p="1"+p;
                     uc=uc>>1;
                 }
-                p = zeros.substr(0, 8-p.size()) + p; //pad 0s to left of the binary code if needed
+                p = zeros.substr(0, 8-p.size()) + p;
                 s+= p;
                 count++;
             }
             decodedFile.close();
-            
-            std::cout << "saved string:    "<< s << std::endl;
         } else if(fileName.find(".txt") != std::string::npos) {
             // encode
             std::fstream readFile;
@@ -100,7 +98,6 @@ int main(int argc, const char * argv[]) {
                     char c = (char)(binary & 255);
                     newFile.write(&c, 1);
                 }
-                std::cout << "original string: " << binaryString << std::endl;
                 readFile.close();
                 newFile.close();
             }
