@@ -31,7 +31,7 @@ int UFBoard::find(int root, int roots[]) {
 void UFBoard::Union(int a, int b, int roots[]) {
     int rootA = find(a, roots);
     int rootB = find(b, roots);
-    if(rootA > rootB) {
+    if(rootA < rootB) {
         roots[rootB] = rootA;
     } else {
         roots[rootA] = rootB;
