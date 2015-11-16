@@ -35,7 +35,8 @@ int main(int argc, const char * argv[]) {
             UFBoard board;
             std::string fileName = argv[1];
             board.canPercolate(fileName);
-            std::cout << board.clusterCount << std::endl;
+            int clusters = board.clusterCount < 4 ? board.clusterCount : board.clusterCount - 4;
+            std::cout << clusters << std::endl;
             // if(board.canPercolate(fileName)) {
             //     std::cout << "Percolates" << std::endl;
             // } else {
