@@ -263,57 +263,59 @@ namespace sc {
                 this->totalEnergy.clear();
                 this->calculateEnergy();
                 this->calculateTotalEnergy(HORIZONTAL);
+                this->printTotalEnergy();
                 
                 // TODO: CHANGE THIS SHIT
-                std::vector<int> firstColumn;// = totalEnergy[totalEnergy.size() - 1];
-//                iter start = min_element(std::begin(lastRow), std::end(lastRow));
-//                int col = (int)(start - lastRow.begin());
-//                int row = (int)totalEnergy.size() - 1;
-//                // starting at position totalEnergy[row][col], remove starting value
-//                image[row].erase(image[row].begin() + col);
-//                
-//                for(;row > 0; row--) {
-//                    int topLeft = -1, top = -1, topRight = -1;
-//                    int min = -1;
-//                    // get top left
-//                    if((int)col - 1 >= 0 &&
-//                       (int)row - 1 >= 0) {
-//                        topLeft = totalEnergy[row - 1][col - 1];
-//                    }
-//                    // get top
-//                    if((int)row - 1 >= 0) {
-//                        top = totalEnergy[row-1][col];
-//                    }
-//                    // get top right
-//                    if(col + 1 < (int)totalEnergy[0].size() &&
-//                       (int)row - 1 >= 0) {
-//                        topRight = totalEnergy[row - 1][col + 1];
-//                    }
-//                    
-//                    if(topLeft != -1) {
-//                        min = topLeft;
-//                    }
-//                    min = min != -1 ? std::min(topLeft, top) : top;
-//                    if(topRight != -1) {
-//                        min = std::min(min, topRight);
-//                    }
-//                    
-//                    int temp = col;
-//                    if(min == topLeft) {
-//                        col = col - 1;
-//                    }
-//                    if(min == topRight &&
-//                       temp == col) {
-//                        col = col + 1;
-//                    }
-//                    
-//                    image[row - 1].erase(image[row - 1].begin() + col);
-//                }
+                std::vector<int> firstCol;
+                for(size_t i = 0; i < totalEnergy.size(); i++) {
+                    firstCol.push_back(totalEnergy[i][0]);
+                }
+                iter start = min_element(std::begin(firstCol), std::end(firstCol));
+                int row = (int)(start - firstCol.begin());
+                int col = 0;
+                // starting at position totalEnergy[row][col], remove starting value
+                image[row].erase(image[row].begin() + col);
+//                image[row].insert(image[row].begin() + col, 255);
+                
+                for(; col < totalEnergy[0].size() - 1; col++) {
+                    int rightTop = -1, right = -1, rightBottom = -1;
+                    int min = -1;
+                    // get rightTop row - 1 x col + 1
+                    if(row - 1 >= 0) {
+                        rightTop = totalEnergy[row - 1][col + 1];
+                    }
+                    // get right row x col + 1
+                    right = totalEnergy[row][col + 1];
+                    // get rightBottom row + 1 x col + 1
+                    if(row + 1 < (int)totalEnergy.size()) {
+                        rightBottom = totalEnergy[row + 1][col + 1];
+                    }
+                    
+                    if(rightTop != -1) {
+                        min = rightTop;
+                    }
+                    min = min != -1 ? std::min(rightTop, right) : right;
+                    if(rightBottom != -1) {
+                        min = std::min(min, rightBottom);
+                    }
+                    
+                    int temp = row;
+                    if(min == rightTop) {
+                        row = row - 1;
+                    }
+                    if(min == rightBottom &&
+                       temp == row) {
+                        row = row + 1;
+                    }
+                    
+                    image[row].erase(image[row].begin() + (col + 1));
+//                    image[row].insert(image[row].begin() + (col + 1), 255);
+                }
             }
         }
         
         void processImage() {
-//            this->removeVerticalSeams();
+            this->removeVerticalSeams();
             this->removeHorizontalSeams();
             std::ofstream pFile;
             pFile.open(this->outputFile);
