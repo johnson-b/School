@@ -1,0 +1,259 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB3584B31C04E8D20071731F /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CB3584B21C04E8D20071731F /* main.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CB3584AD1C04E8D20071731F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		CB3584AF1C04E8D20071731F /* seam-carving */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "seam-carving"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB3584B21C04E8D20071731F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		CB3584B91C04E99E0071731F /* SeamCarving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SeamCarving.h; sourceTree = "<group>"; };
+		CB3EBA991C112826001E9415 /* file.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = file.pgm; sourceTree = "<group>"; };
+		CB3EBA9A1C11286D001E9415 /* file_processed.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = file_processed.pgm; sourceTree = "<group>"; };
+		CB8FE1E81C0B64EF007B965C /* test.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.pgm; sourceTree = "<group>"; };
+		CB8FE1EA1C0B6848007B965C /* mona_lisa.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mona_lisa.pgm; sourceTree = "<group>"; };
+		CB8FE1EC1C0B6DB3007B965C /* test_processed.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test_processed.pgm; sourceTree = "<group>"; };
+		CB8FE1ED1C0BA36F007B965C /* coins.pgm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = coins.pgm; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CB3584AC1C04E8D20071731F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CB3584A61C04E8D20071731F = {
+			isa = PBXGroup;
+			children = (
+				CB3584B11C04E8D20071731F /* seam-carving */,
+				CB3584B01C04E8D20071731F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CB3584B01C04E8D20071731F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB3584AF1C04E8D20071731F /* seam-carving */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB3584B11C04E8D20071731F /* seam-carving */ = {
+			isa = PBXGroup;
+			children = (
+				CB3EBA9A1C11286D001E9415 /* file_processed.pgm */,
+				CB8FE1ED1C0BA36F007B965C /* coins.pgm */,
+				CB3584B21C04E8D20071731F /* main.cpp */,
+				CB8FE1EA1C0B6848007B965C /* mona_lisa.pgm */,
+				CB3584B91C04E99E0071731F /* SeamCarving.h */,
+				CB8FE1EC1C0B6DB3007B965C /* test_processed.pgm */,
+				CB8FE1E81C0B64EF007B965C /* test.pgm */,
+				CB3EBA991C112826001E9415 /* file.pgm */,
+			);
+			path = "seam-carving";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CB3584AE1C04E8D20071731F /* seam-carving */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB3584B61C04E8D20071731F /* Build configuration list for PBXNativeTarget "seam-carving" */;
+			buildPhases = (
+				CB3584AB1C04E8D20071731F /* Sources */,
+				CB3584AC1C04E8D20071731F /* Frameworks */,
+				CB3584AD1C04E8D20071731F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "seam-carving";
+			productName = "seam-carving";
+			productReference = CB3584AF1C04E8D20071731F /* seam-carving */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CB3584A71C04E8D20071731F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Bryan Johnson";
+				TargetAttributes = {
+					CB3584AE1C04E8D20071731F = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+				};
+			};
+			buildConfigurationList = CB3584AA1C04E8D20071731F /* Build configuration list for PBXProject "seam-carving" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CB3584A61C04E8D20071731F;
+			productRefGroup = CB3584B01C04E8D20071731F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CB3584AE1C04E8D20071731F /* seam-carving */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CB3584AB1C04E8D20071731F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB3584B31C04E8D20071731F /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		CB3584B41C04E8D20071731F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		CB3584B51C04E8D20071731F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		CB3584B71C04E8D20071731F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CB3584B81C04E8D20071731F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CB3584AA1C04E8D20071731F /* Build configuration list for PBXProject "seam-carving" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB3584B41C04E8D20071731F /* Debug */,
+				CB3584B51C04E8D20071731F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB3584B61C04E8D20071731F /* Build configuration list for PBXNativeTarget "seam-carving" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB3584B71C04E8D20071731F /* Debug */,
+				CB3584B81C04E8D20071731F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CB3584A71C04E8D20071731F /* Project object */;
+}

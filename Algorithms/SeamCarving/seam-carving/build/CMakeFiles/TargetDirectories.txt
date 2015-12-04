@@ -1,0 +1,1 @@
+/Users/bryanjohnson/desktop/seam-carving/seam-carving/build/CMakeFiles/sc.dir

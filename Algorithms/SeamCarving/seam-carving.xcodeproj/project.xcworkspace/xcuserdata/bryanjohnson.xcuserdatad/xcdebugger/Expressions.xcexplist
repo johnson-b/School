@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "sc::SeamCarving::removeHorizontalSeams():SeamCarving.h">
+      </ContextState>
+      <ContextState
+         contextName = "sc::SeamCarving::processImage():SeamCarving.h">
+      </ContextState>
+      <ContextState
+         contextName = "sc::SeamCarving::removeVerticalSeams():SeamCarving.h">
+         <PersistentStrings>
+            <PersistentString
+               value = "row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "sc::SeamCarving::calculateTotalEnergy():SeamCarving.h">
+      </ContextState>
+      <ContextState
+         contextName = "main:main.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "c - col - 1">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "sc::SeamCarving::calculateTotalEnergy(sc::seamDirection):SeamCarving.h">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

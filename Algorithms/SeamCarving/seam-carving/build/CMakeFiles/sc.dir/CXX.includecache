@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/bryanjohnson/desktop/seam-carving/seam-carving/SeamCarving.h
+vector
+-
+fstream
+-
+iostream
+-
+string
+-
+cmath
+-
+algorithm
+-
+
+/Users/bryanjohnson/desktop/seam-carving/seam-carving/main.cpp
+iostream
+-
+stdlib.h
+-
+SeamCarving.h
+/Users/bryanjohnson/desktop/seam-carving/seam-carving/SeamCarving.h
+
