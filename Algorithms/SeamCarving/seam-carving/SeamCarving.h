@@ -198,10 +198,10 @@ namespace sc {
             }
         }
         
-        void removeVerticalSeams() {
+        void removeSeams(int seams) {
             using iter = std::vector<int>::iterator;
             
-            for(int i = 0; i < vSeams; i++) {
+            for(int i = 0; i < seams; i++) {
                 this->energy.clear();
                 this->totalEnergy.clear();
                 this->calculateEnergy();
@@ -254,154 +254,14 @@ namespace sc {
             }
         }
         
-        void removeHorizontalSeams() {
-            using iter = std::vector<int>::iterator;
-            
-            for(int i = 0; i < hSeams; i++) {
-                this->energy.clear();
-                this->totalEnergy.clear();
-                this->calculateEnergy();
-                this->calculateTotalEnergy(HORIZONTAL);
-                rotateTotalEnergy();
-                rotateImage();
-                printTotalEnergy();
-                
-                std::vector<int> lastRow = totalEnergy[totalEnergy.size() - 1];
-                iter start = min_element(std::begin(lastRow), std::end(lastRow));
-                int col = (int)(start - lastRow.begin());
-                int row = (int)totalEnergy.size() - 1;
-                // starting at position totalEnergy[row][col], remove starting value
-                image[row].erase(image[row].begin() + col);
-                
-                for(;row > 0; row--) {
-                    int topLeft = -1, top = -1, topRight = -1;
-                    int min = -1;
-                    // get top left
-                    if((int)col - 1 >= 0 &&
-                       (int)row - 1 >= 0) {
-                        topLeft = totalEnergy[row - 1][col - 1];
-                    }
-                    // get top
-                    if((int)row - 1 >= 0) {
-                        top = totalEnergy[row-1][col];
-                    }
-                    // get top right
-                    if(col + 1 < (int)totalEnergy[0].size() &&
-                       (int)row - 1 >= 0) {
-                        topRight = totalEnergy[row - 1][col + 1];
-                    }
-                    
-                    if(topLeft != -1) {
-                        min = topLeft;
-                    }
-                    min = min != -1 ? std::min(topLeft, top) : top;
-                    if(topRight != -1) {
-                        min = std::min(min, topRight);
-                    }
-                    
-                    int temp = col;
-                    if(min == topLeft) {
-                        col = col - 1;
-                    }
-                    if(min == topRight &&
-                       temp == col) {
-                        col = col + 1;
-                    }
-                    
-                    image[row - 1].erase(image[row - 1].begin() + col);
-                    
-                    //                std::vector<int> firstCol;
-                    //                for(size_t i = 0; i < totalEnergy.size(); i++) {
-                    //                    firstCol.push_back(totalEnergy[i][0]);
-                    //                }
-                    //                iter start = min_element(std::begin(firstCol), std::end(firstCol));
-                    //                int row = (int)(start - firstCol.begin());
-                    //                int col = 0;
-                    //                // starting at position totalEnergy[row][col], remove starting value
-                    //                image[row].erase(image[row].begin() + col);
-                    //                image[row].insert(image[row].begin() + col, 255);
-                    //
-                    //                for(; col < (int)totalEnergy[0].size() - 1; col++) {
-                    //                    int rightTop = -1, right = -1, rightBottom = -1;
-                    //                    int min = -1;
-                    //                    // get rightTop row - 1 x col + 1
-                    //                    if(row - 1 >= 0) {
-                    //                        rightTop = totalEnergy[row - 1][col + 1];
-                    //                    }
-                    //                    // get right row x col + 1
-                    //                    right = totalEnergy[row][col + 1];
-                    //                    // get rightBottom row + 1 x col + 1
-                    //                    if(row + 1 < (int)totalEnergy.size()) {
-                    //                        rightBottom = totalEnergy[row + 1][col + 1];
-                    //                    }
-                    //
-                    //                    if(rightTop != -1) {
-                    //                        min = rightTop;
-                    //                    }
-                    //                    min = min != -1 ? std::min(rightTop, right) : right;
-                    //                    if(rightBottom != -1) {
-                    //                        min = std::min(min, rightBottom);
-                    //                    }
-                    //
-                    //                    int temp = row;
-                    //                    if(min == rightTop) {
-                    //                        row = row - 1;
-                    //                    }
-                    //                    if(min == rightBottom &&
-                    //                       temp == row) {
-                    //                        row = row + 1;
-                    //                    }
-                    //
-                    //                    image[row].erase(image[row].begin() + (col + 1));
-                    //                    image[row].insert(image[row].begin() + (col + 1), 255);
-                }
-            }
-            rotateBackTotalEnergy();
-            rotateBackImage();
-        }
-        
-        void rotateTotalEnergy() {
-            std::vector<std::vector<int>> totalEnergyRotated;
-            std::vector<int> row;
-            row.resize(totalEnergy.size());
-            totalEnergyRotated.resize(totalEnergy[0].size(), row);
-            
-            for(int row = 0; row < totalEnergy.size(); row++) {
-                for(int col = 0; col < totalEnergy[row].size(); col++) {
-                    int temp = (int)totalEnergy[row].size() - col - 1;
-                    totalEnergyRotated[temp].erase(totalEnergyRotated[temp].begin() + row);
-                    totalEnergyRotated[temp].insert(totalEnergyRotated[temp].begin() + row, totalEnergy[row][col]);
-                }
-            }
-            
-            totalEnergy = totalEnergyRotated;
-            
-        }
-        
-        void rotateBackTotalEnergy() {
-            std::vector<std::vector<int>> originalTotalEnergy;
-            std::vector<int> row;
-            row.resize(totalEnergy.size());
-            originalTotalEnergy.resize(totalEnergy[0].size(), row);
-            
-            for(int row = 0; row < originalTotalEnergy.size(); row++) {
-                for(int col = 0; col < originalTotalEnergy[row].size(); col++) {
-                    int temp = (int)originalTotalEnergy[row].size() - col - 1;
-                    originalTotalEnergy[row].erase(originalTotalEnergy[row].begin() + temp);
-                    originalTotalEnergy[row].insert(originalTotalEnergy[row].begin() + temp, totalEnergy[col][row]);
-                }
-            }
-            
-            totalEnergy = originalTotalEnergy;
-        }
         
         void rotateImage() {
             std::vector<std::vector<int>> imageRotated;
             std::vector<int> row;
             row.resize(image.size());
             imageRotated.resize(image[0].size(), row);
-            for(int row = 0; row < image.size(); row++) {
-                for(int col = 0; col < image[row].size(); col++) {
+            for(int row = 0; row < (int)image.size(); row++) {
+                for(int col = 0; col < (int)image[row].size(); col++) {
                     int temp = (int)image[row].size() - col - 1;
                     imageRotated[temp].erase(imageRotated[temp].begin() + row);
                     imageRotated[temp].insert(imageRotated[temp].begin() + row, image[row][col]);
@@ -417,8 +277,8 @@ namespace sc {
             row.resize(image.size());
             originalImage.resize(image[0].size(), row);
             
-            for(int row = 0; row < originalImage.size(); row++) {
-                for(int col = 0; col < originalImage[row].size(); col++) {
+            for(int row = 0; row < (int)originalImage.size(); row++) {
+                for(int col = 0; col < (int)originalImage[row].size(); col++) {
                     int temp = (int)originalImage[row].size() - col - 1;
                     originalImage[row].erase(originalImage[row].begin() + temp);
                     originalImage[row].insert(originalImage[row].begin() + temp, image[col][row]);
@@ -429,8 +289,11 @@ namespace sc {
         }
         
         void processImage() {
-            this->removeVerticalSeams();
-            this->removeHorizontalSeams();
+            this->removeSeams(this->vSeams);
+            this->rotateImage();
+            this->removeSeams(this->hSeams);
+            if(hSeams > 0)
+                this->rotateBackImage();
             std::ofstream pFile;
             pFile.open(this->outputFile);
             if(pFile.is_open()) {
