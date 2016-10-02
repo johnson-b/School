@@ -124,18 +124,6 @@ public class SinglyLinkedList<T> implements LinkedList<T> {
         return current;
     }
 
-//    if (index <= 0)
-//            return null;
-//
-//    Node crunchifyCurrent = head.getNext();
-//    for (int i = 1; i < index; i++) {
-//        if (crunchifyCurrent.getNext() == null)
-//            return null;
-//
-//        crunchifyCurrent = crunchifyCurrent.getNext();
-//    }
-//    return crunchifyCurrent.getData();
-
     @Override
     public void print() {
         Node<T> current = head;
